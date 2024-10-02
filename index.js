@@ -37,13 +37,14 @@ let activeBoard = ""
 // TASK: FIX BUGS
 function fetchAndDisplayBoardsAndTasks() {
   const tasks = getTasks();
+  console.log(tasks);
   const boards = [...new Set(tasks.map(task => task.board).filter(Boolean))];
   displayBoards(boards);
   if (boards.length > 0) {
     const localStorageBoard = JSON.parse(localStorage.getItem("activeBoard"))
     activeBoard = localStorageBoard ? localStorageBoard :  boards[0]; 
     elements.headerBoardName.textContent = activeBoard
-    styleActiveBoard(activeBoard)
+    styleActiveBoard(activeBoard).forEach
     refreshTasksUI();
   }
 }
@@ -112,13 +113,13 @@ function refreshTasksUI() {
 // Styles the active board by adding an active class
 // TASK: Fix Bugs
 function styleActiveBoard(boardName) {
-  document.querySelectorAll('.board-btn').foreach(btn => { 
+  document.querySelectorAll('.board-btn').forEach(btn => { 
     
     if(btn.textContent === boardName) {
-      btn.add('active') 
+      btn.classList.add('active') 
     }
     else {
-      btn.remove('active'); 
+      btn.classList.remove('active'); 
     }
   });
 }
@@ -308,6 +309,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function init() {
+  initializeData();
   setupEventListeners();
   const showSidebar = localStorage.getItem('showSideBar') === 'true';
   toggleSidebar(showSidebar);
