@@ -16,6 +16,8 @@ function initializeData() {
   }
 }
 
+
+
 const task = document.getElementById('')
 // TASK: Get elements from the DOM
 const elements = {
@@ -39,16 +41,20 @@ function fetchAndDisplayBoardsAndTasks() {
   const tasks = getTasks();
   console.log(tasks);
   const boards = [...new Set(tasks.map(task => task.board).filter(Boolean))];
+
+  console.log(boards)
+
   displayBoards(boards);
   if (boards.length > 0) {
     const localStorageBoard = JSON.parse(localStorage.getItem("activeBoard"))
     activeBoard = localStorageBoard ? localStorageBoard :  boards[0]; 
     elements.headerBoardName.textContent = activeBoard
-    styleActiveBoard(activeBoard).forEach
+    styleActiveBoard(activeBoard)
     refreshTasksUI();
   }
 }
 
+;
 // Creates different boards in the DOM
 // TASK: Fix Bugs
 function displayBoards(boards) {
@@ -70,11 +76,13 @@ function displayBoards(boards) {
 
 }
 
+console.log(task);
+
 // Filters tasks corresponding to the board name and displays them on the DOM.
 // TASK: Fix Bugs
 function filterAndDisplayTasksByBoard(boardName) {
   const tasks = getTasks(); // Fetch tasks from a simulated local storage function
-  const filteredTasks = tasks.filter(task => task.board = boardName);
+  const filteredTasks = tasks.filter(task => task.board === boardName);
 
   // Ensure the column titles are set outside of this function or correctly initialized before this function runs
 
@@ -89,7 +97,7 @@ function filterAndDisplayTasksByBoard(boardName) {
     const tasksContainer = document.createElement("div");
     column.appendChild(tasksContainer);
 
-    filteredTasks.filter(task => task.status = status).forEach(task => { 
+    filteredTasks.filter(task => task.status === status).forEach(task => { 
       const taskElement = document.createElement("div");
       taskElement.classList.add("task-div");
       taskElement.textContent = task.title;
@@ -105,6 +113,7 @@ function filterAndDisplayTasksByBoard(boardName) {
   });
 }
 
+console.log(task);
 
 function refreshTasksUI() {
   filterAndDisplayTasksByBoard(activeBoard);
@@ -124,6 +133,7 @@ function styleActiveBoard(boardName) {
   });
 }
 
+console.log(task);
 
 function addTaskToUI(task) {
   const column = document.querySelector('.column-div[data-status="${task.status}"]'); 
@@ -148,7 +158,7 @@ function addTaskToUI(task) {
   tasksContainer.appendChild(); 
 }
 
-
+console.log(task);
 
 function setupEventListeners() {
   // Cancel editing task event listener
@@ -186,12 +196,14 @@ function setupEventListeners() {
     addTask(event)
   });
 }
-
+console.log(task);
 // Toggles tasks modal
 // Task: Fix bugs
 function toggleModal(show, modal = elements.modalWindow) {
   modal.style.display = show ? 'block' : 'none'; 
 }
+
+console.log(task);
 
 /*************************************************************************************************************************************************
  * COMPLETE FUNCTION CODE
@@ -213,7 +225,7 @@ function addTask(event) {
       refreshTasksUI();
     }
 }
-
+console.log(task);
 
 function toggleSidebar(show) {
   const sideBar = document.getElementById('side-bar-div');
@@ -232,7 +244,7 @@ function toggleSidebar(show) {
     localStorage.setItem('showSideBar', 'false'); // Save the state in local storage
   }
 }
-
+console.log(task);
 function toggleTheme() {
   const body = document.body;
   const isLightThemeEnabled = body.classList.toggle('light-theme'); // Toggles the light theme class on the body
@@ -245,7 +257,7 @@ function toggleTheme() {
   }
 }
 
-
+console.log(task);
 
 function openEditTaskModal(task) {
   // Set task details in modal inputs
@@ -279,6 +291,8 @@ function openEditTaskModal(task) {
   toggleModal(true, elements.editTaskModal); // Show the edit task modal
 }
 
+console.log(task);
+
 function saveTaskChanges(taskId) {
   // Get new user inputs
   const updatedTitle = document.getElementById('edit-task-title-input').value;
@@ -302,11 +316,14 @@ function saveTaskChanges(taskId) {
   refreshTasksUI();
 }
 
+console.log(task);
 /*************************************************************************************************************************************************/
 
 document.addEventListener('DOMContentLoaded', function() {
   init(); // init is called after the DOM is fully loaded
 });
+
+console.log(task);
 
 function init() {
   initializeData();
@@ -317,3 +334,5 @@ function init() {
   document.body.classList.toggle('light-theme', isLightTheme);
   fetchAndDisplayBoardsAndTasks(); // Initial display of boards and tasks
 }
+
+console.log(task);
