@@ -30,7 +30,8 @@ const elements = {
   filterDiv: document.getElementById('filterDiv'),
   editTaskModal: document.querySelector('.edit-task-modal-window'),
   columnDivs: document.querySelectorAll('.column-div'),
-  themeSwitch: document.getElementById('switch')
+  themeSwitch: document.getElementById('switch'),
+  submitNewTask: document.getElementById('create-task-btn'),
 };
 
 let activeBoard = ""
@@ -185,7 +186,7 @@ function setupEventListeners() {
   // Theme switch event listener
   elements.themeSwitch.addEventListener('change', toggleTheme);
 
-  // Show Add New Task Modal event listener
+  // Show new Task Modal event listener
   elements.createNewTaskBtn.addEventListener('click', () => {
     toggleModal(true);
     elements.filterDiv.style.display = 'block'; // Also show the filter overlay
@@ -214,7 +215,10 @@ function addTask(event) {
 
   //Assign user input to the task object
     const task = {
-      
+      title: document.getElementById('title-input').value, 
+      description: document.getElementById('desc-input').value, 
+      status: document.getElementById('select-status').value,
+      board: activeBoard
     };
     const newTask = createNewTask(task);
     if (newTask) {
